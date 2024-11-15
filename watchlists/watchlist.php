@@ -20,9 +20,9 @@ function validateJWT($token) {
     }
 }
 function addWatchlist($conn, $id, $original_language, $original_title, $overview, $popularity, $poster_path, $release_date, $title, $video, $vote_average, $vote_count, $usr_mail) {
-    $sql = "INSERT INTO watchlists (id, original_language, original_title, overview, popularity, poster_path, release_date, title, video, vote_average, vote_count, usr_mail) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
+    $sql = "INSERT INTO watchlists (id, original_language, original_title, overview, popularity, poster_path, release_date, title, video, vote_average, vote_count, usr_mail,date_added) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,CURRENT_DATE)";
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param("ssssssssssss", $id, $original_language, $original_title, $overview, $popularity, $poster_path, $release_date, $title, $video, $vote_average, $vote_count, $usr_mail);
+    $stmt->bind_param("sssssssssssss", $id, $original_language, $original_title, $overview, $popularity, $poster_path, $release_date, $title, $video, $vote_average, $vote_count, $usr_mail);
     if ($stmt->execute()) {
         return true;
     } else {
